@@ -6,6 +6,7 @@
 import os
 import sys
 
+COUNTRIES_CAPITALS = {}
 
 def reset():
     """This cleans the screen"""
@@ -48,6 +49,42 @@ def insert_country():
             message()
     return country_title
 
+def insert_capital():
+    """This saves the capital"""
+    enter_capital = False
+    while enter_capital == False:
+        capital = raw_input("Insert the capital: ")
+        capital_title = is_title(capital)
+        enter_capital = is_alpha(capital)
+        if enter_capital == False: #If the capital is not an alphabetical value
+            message()
+    return capital_title
+
+def add_cc(country, capital):
+    """This saves the country and capital in a dictionary"""
+    COUNTRIES_CAPITALS[country] = capital
+
+def insert_country_and_capital():
+    """This adds the countries and capitals in a dictionary"""
+
+    country = insert_country()
+    capital = insert_capital()
+    add_cc(country, capital)
+
+    #If the user wants to insert another article
+    while True:
+        choose_user = raw_input("Do you want to insert another country and capital? y/n  ")
+        another = minuscule(choose_user)
+        if another == "y":
+            country = insert_country()
+            capital = insert_capital()
+            self.add_cc(country, capital)
+        elif another == "n":
+            reset()
+            menu()
+        else:
+            print "Only can write -y- or -n-  "
+    return another
 
 def menu_print():
     """This shows the options that has the menu"""
@@ -71,7 +108,11 @@ def menu_option():
         choose_user = raw_input(" - ")
         choose_user = minuscule(choose_user)
 
-        if choose_user == "7":
+        if choose_user == "1":
+            reset()
+            insert_country_and_capital()
+
+        elif choose_user == "7":
             reset()
             sys.exit()
         else:

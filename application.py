@@ -124,6 +124,17 @@ def show_all():
         print "{k:^25s}{v}".format(k=key, v=COUNTRIES_CAPITALS[key])
     print "\n" + "-" * 50
 
+def show_all_ordered():
+    """This shows the countries and capitals ordered"""
+    reset()
+    print "-"*50
+    print "These are the countries and capitals".center(50, " ")
+    print "Ordered\n".center(50, " ")
+
+                    #This sorts the Contries                 This sorts the capitals
+    for key, value in sorted(COUNTRIES_CAPITALS.iteritems(), key=lambda (k, v): (v, k)):
+        print "{country:^25s}{capital}".format(country=key, capital=value)
+    print "\n" + "-" * 50
 
 def menu_print():
     """This shows the options that has the menu"""
@@ -166,7 +177,12 @@ def menu_option():
             show_all()
             press_enter()
 
-        elif choose_user == "7":
+        elif choose_user == "5" or choose_user == "allordered":
+            reset()
+            show_all_ordered()
+            press_enter()
+
+        elif choose_user == "7" or choose_user == "exit":
             reset()
             sys.exit()
         else:

@@ -37,6 +37,10 @@ def message():
     """This shows a message"""
     print "**Insert a valid name**"
 
+def press_enter():
+    """This asks to the user that press enter"""
+    raw_input("Press -Enter-")
+
 def insert_country():
     """This saves the country"""
     reset()
@@ -78,13 +82,24 @@ def insert_country_and_capital():
         if another == "y":
             country = insert_country()
             capital = insert_capital()
-            self.add_cc(country, capital)
+            add_cc(country, capital)
         elif another == "n":
             reset()
             menu()
         else:
             print "Only can write -y- or -n-  "
     return another
+
+def show_countries():
+    """This shows the list of the countries"""
+    reset()
+    print "-" * 70
+    print "*These are the countries*\n".center(70, " ")
+
+    #This iterarates in the keys of the dictionary
+    for key in COUNTRIES_CAPITALS.keys():
+        print key.center(70, " ") #This centers the list of the countries
+    print "\n" + "-" * 70
 
 def menu_print():
     """This shows the options that has the menu"""
@@ -108,9 +123,16 @@ def menu_option():
         choose_user = raw_input(" - ")
         choose_user = minuscule(choose_user)
 
-        if choose_user == "1":
+        if choose_user == "1" or choose_user == "country":
             reset()
             insert_country_and_capital()
+
+        elif choose_user == "2" or choose_user == "countries":
+            reset()
+            show_countries()
+            press_enter()
+            reset()
+            menu()
 
         elif choose_user == "7":
             reset()

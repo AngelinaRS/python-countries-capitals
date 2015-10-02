@@ -39,7 +39,9 @@ def message():
 
 def press_enter():
     """This asks to the user that press enter"""
-    raw_input("Press -Enter-")
+    raw_input("Press -Enter-  ")
+    reset()
+    menu()
 
 def insert_country():
     """This saves the country"""
@@ -101,6 +103,17 @@ def show_countries():
         print key.center(70, " ") #This centers the list of the countries
     print "\n" + "-" * 70
 
+def show_capitals():
+    """This shows the list of the capitals"""
+    reset()
+    print "-" * 70
+    print "*These are the capitals*\n".center(70, " ")
+
+    #This iterarates in the values of the dictionary
+    for value in COUNTRIES_CAPITALS.values():
+        print value.center(70, " ") #This centers the list of the capitals
+    print "\n" + "-" * 70
+
 def menu_print():
     """This shows the options that has the menu"""
 
@@ -131,8 +144,11 @@ def menu_option():
             reset()
             show_countries()
             press_enter()
+
+        elif  choose_user == "3" or choose_user == "capitals":
             reset()
-            menu()
+            show_capitals()
+            press_enter()
 
         elif choose_user == "7":
             reset()

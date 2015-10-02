@@ -170,6 +170,16 @@ def send_mail():
         print "Error! Verify your password"
         send_mail()
 
+def valid_menu(choose_user):
+    """This verifies if the dictionary is empty"""
+    reset()
+    if COUNTRIES_CAPITALS == {} and (choose_user == "2" or choose_user == "countries" \
+        or choose_user == "3" or choose_user == "capitals" \
+        or choose_user == "4" or choose_user == "all" \
+        or choose_user == "5" or choose_user == "allordered" \
+        or choose_user == "6" or choose_user == "allmail"):
+        return True
+
 def menu_print():
     """This shows the options that has the menu"""
 
@@ -192,43 +202,47 @@ def menu_option():
         choose_user = raw_input(" - ")
         choose_user = minuscule(choose_user)
 
-        if choose_user == "1" or choose_user == "country":
-            reset()
-            insert_country_and_capital()
-
-        elif choose_user == "2" or choose_user == "countries":
-            reset()
-            show_countries()
+        if valid_menu(choose_user) == True:
+            print "\n There are not countries and capitals to show\n"
             press_enter()
-
-        elif choose_user == "3" or choose_user == "capitals":
-            reset()
-            show_capitals()
-            press_enter()
-
-        elif choose_user == "4" or choose_user == "all":
-            reset()
-            show_all()
-            press_enter()
-
-        elif choose_user == "5" or choose_user == "allordered":
-            reset()
-            show_all_ordered()
-            press_enter()
-
-        elif choose_user == "6" or choose_user == "allmail":
-            reset()
-            send_mail()
-            press_enter()
-
-        elif choose_user == "7" or choose_user == "exit":
-            reset()
-            sys.exit()
-
         else:
-            reset()
-            print "**Choose a valid option**"
-            menu()
+            if choose_user == "1" or choose_user == "country":
+                reset()
+                insert_country_and_capital()
+
+            elif choose_user == "2" or choose_user == "countries":
+                reset()
+                show_countries()
+                press_enter()
+
+            elif choose_user == "3" or choose_user == "capitals":
+                reset()
+                show_capitals()
+                press_enter()
+
+            elif choose_user == "4" or choose_user == "all":
+                reset()
+                show_all()
+                press_enter()
+
+            elif choose_user == "5" or choose_user == "allordered":
+                reset()
+                show_all_ordered()
+                press_enter()
+
+            elif choose_user == "6" or choose_user == "allmail":
+                reset()
+                send_mail()
+                press_enter()
+
+            elif choose_user == "7" or choose_user == "exit":
+                reset()
+                sys.exit()
+
+            else:
+                reset()
+                print "**Choose a valid option**"
+                menu()
 
 def menu():
     """This saves the menu"""

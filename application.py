@@ -5,6 +5,11 @@
 
 import os
 import sys
+import smtplib
+import getpass
+from email.MIMEMultipart import MIMEMultipart
+from email.MIMEText import MIMEText
+
 
 COUNTRIES_CAPITALS = {}
 
@@ -136,6 +141,35 @@ def show_all_ordered():
         print "{country:^25s}{capital}".format(country=key, capital=value)
     print "\n" + "-" * 50
 
+def send_mail():
+    """This sends the list of countries and capital to lgarcia@cognits.co"""
+
+    fromaddr = "yordani.darkmoon@gmail.com"  #The username
+    password = getpass.getpass("Password: ")  #Not showing the password
+    toaddrs = "yordani.darkmoon@gmail.com"
+    body = ""
+
+    for country, capital in COUNTRIES_CAPITALS.iteritems():
+        body = body + country + "-" + capital + "\n"
+
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddrs
+    msg['Subject'] = "Countres and Capitals"
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        server = smtplib.SMTP('smtp.gmail.com:587')
+        server.starttls()
+        server.login(fromaddr, password)
+        text = msg.as_string()
+        server.sendmail(fromaddr, toaddrs, text)
+        server.quit()
+        print "Email Sent"
+    except:
+        print "Error! Verify your password"
+        send_mail()
+
 def menu_print():
     """This shows the options that has the menu"""
 
@@ -182,9 +216,15 @@ def menu_option():
             show_all_ordered()
             press_enter()
 
+        elif choose_user == "6" or choose_user == "allmail":
+            reset()
+            send_mail()
+            press_enter()
+
         elif choose_user == "7" or choose_user == "exit":
             reset()
             sys.exit()
+
         else:
             reset()
             print "**Choose a valid option**"

@@ -114,6 +114,17 @@ def show_capitals():
         print value.center(70, " ") #This centers the list of the capitals
     print "\n" + "-" * 70
 
+def show_all():
+    """This shows the countries with their capitals"""
+    reset()
+    print "-" * 50
+    print "*These are the countries and capitals*\n".center(50, " ")
+
+    for key in COUNTRIES_CAPITALS:
+        print "{k:^25s}{v}".format(k=key, v=COUNTRIES_CAPITALS[key])
+    print "\n" + "-" * 50
+
+
 def menu_print():
     """This shows the options that has the menu"""
 
@@ -145,9 +156,14 @@ def menu_option():
             show_countries()
             press_enter()
 
-        elif  choose_user == "3" or choose_user == "capitals":
+        elif choose_user == "3" or choose_user == "capitals":
             reset()
             show_capitals()
+            press_enter()
+
+        elif choose_user == "4" or choose_user == "all":
+            reset()
+            show_all()
             press_enter()
 
         elif choose_user == "7":

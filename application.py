@@ -78,7 +78,6 @@ class CountriesAndCapitals(object):
         """This saves the country and capital in a dictionary"""
         self.countries_capitals[country] = capital
 
-
     def insert_country_and_capital(self):
         """This adds the countries and capitals in a dictionary"""
 
@@ -153,19 +152,20 @@ class CountriesAndCapitals(object):
 
         fromaddr = raw_input("Insert your email:  ")  #The username
         password = getpass.getpass("Password: ")  #Not showing the password
-        toaddrs =  fromaddr
+        toaddrs = fromaddr
         body = ""
-
+        #This adds to the message the countries and capitals
         for country, capital in self.countries_capitals.iteritems():
             body = body + country + "-" + capital + "\n"
 
         msg = MIMEMultipart()
-        msg['From'] = fromaddr
-        msg['To'] = toaddrs
-        msg['Subject'] = "Countres and Capitals"
-        msg.attach(MIMEText(body, 'plain'))
+        msg['From'] = fromaddr #This saves the mail of the sender
+        msg['To'] = toaddrs  #This saves the mail of the receiver
+        msg['Subject'] = "Countres and Capitals"  #This saves the subject
+        msg.attach(MIMEText(body, 'plain')) #This saves the message
 
         try:
+            #This verifies if the data are valid to send the mail
             server = smtplib.SMTP('smtp.gmail.com:587')
             server.starttls()
             server.login(fromaddr, password)
@@ -174,6 +174,7 @@ class CountriesAndCapitals(object):
             server.quit()
             print "\n\nEmail Sent"
         except:
+            #This asks again the mail and password if the data are invalid
             self.reset()
             print "Error! Invalid username or password\n"
             self.send_mail()

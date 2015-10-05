@@ -44,7 +44,7 @@ def message():
 
 def press_enter():
     """This asks to the user that press enter"""
-    raw_input("Press -Enter-  ")
+    raw_input("\n\nPress -Enter-  ")
     reset()
     menu()
 
@@ -84,7 +84,7 @@ def insert_country_and_capital():
 
     #If the user wants to insert another article
     while True:
-        choose_user = raw_input("Do you want to insert another country and capital? y/n  ")
+        choose_user = raw_input("\nDo you want to insert another country and capital? y/n  ")
         another = minuscule(choose_user)
         if another == "y":
             country = insert_country()
@@ -144,9 +144,12 @@ def show_all_ordered():
 def send_mail():
     """This sends the list of countries and capital to lgarcia@cognits.co"""
 
-    fromaddr = "yordani.darkmoon@gmail.com"  #The username
+    print "Remember, the list of countries and capitals"
+    print "will be sent to the same email that You insert\n"
+
+    fromaddr = raw_input("Insert your email:  ")  #The username
     password = getpass.getpass("Password: ")  #Not showing the password
-    toaddrs = "yordani.darkmoon@gmail.com"
+    toaddrs =  fromaddr
     body = ""
 
     for country, capital in COUNTRIES_CAPITALS.iteritems():
@@ -165,9 +168,10 @@ def send_mail():
         text = msg.as_string()
         server.sendmail(fromaddr, toaddrs, text)
         server.quit()
-        print "Email Sent"
+        print "\n\nEmail Sent"
     except:
-        print "Error! Verify your password"
+        reset()
+        print "Error! Invalid username or password\n"
         send_mail()
 
 def valid_menu(choose_user):
@@ -203,7 +207,7 @@ def menu_option():
         choose_user = minuscule(choose_user)
 
         if valid_menu(choose_user) == True:
-            print "\n There are not countries and capitals to show\n"
+            print "\n There are not lists to show\n"
             press_enter()
         else:
             if choose_user == "1" or choose_user == "country":

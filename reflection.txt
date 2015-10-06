@@ -1,1 +1,25 @@
-Write your answers here!
+1. What did you learn in this lesson?
+
+	I learned to use the classes, recursivity, the function "sorted"
+
+2. Explain how you solved the storage of data.
+
+	I use a dictionary to save the countries and capitals that the user inserts
+
+3. What is a dictionary and because it is important?
+
+	A dictionary is a type of the data that stores the elements key, value
+	It is important becouse helps to store many data and allows to access 
+	to the data through of the keys
+
+4. Explain how you solved the sort data.
+
+	I searched in the internet inforamation, and I used the function "sorted"
+	to sort the keys of the dictionary and after I used the finction "lamda"
+	to sort the values "capitals"
+
+5. What are the best practices followed to build your application?
+
+	1. documenting the code
+	2. using the recursivity
+	3. A code sorted

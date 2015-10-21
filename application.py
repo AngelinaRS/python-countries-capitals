@@ -26,15 +26,23 @@ class CountriesAndCapitals(object):
 
     def is_alpha(self, country_or_capital):
         """This verifies if has letters"""
-        if country_or_capital.isalpha() == True:
-            return True
-        else:
+        try:
+            country_or_capital = country_or_capital.decode("utf-8")
+            #If in the word there is a space but is not empty
+            if country_or_capital.isalpha() == True or " " in country_or_capital \
+            and country_or_capital.isspace() == False:
+                return True
+            else:
+                return False
+        except:
             return False
 
     def is_title(self, country_or_capital):
         """This converts in format title"""
-        country_or_capital = country_or_capital.title()
-        return country_or_capital
+        decode = country_or_capital.decode("utf-8") #This allows special characters
+        title = decode.title()
+        text = title.encode("utf-8") #This converts in format title the special characters
+        return text
 
     def minuscule(self, choose_user):
         """This converts the choose user in minuscule"""
@@ -127,9 +135,10 @@ class CountriesAndCapitals(object):
         self.reset()
         print "-" * 50
         print "*These are the countries and capitals*\n".center(50, " ")
+        print "Country".center(24, "*"), "Capital".center(24, "*") + "\n"
 
         for key in self.countries_capitals:
-            print "{k:^25s}{v}".format(k=key, v=self.countries_capitals[key])
+            print key.center(24, " "), self.countries_capitals[key].center(24, " ")
         print "\n" + "-" * 50
 
     def show_all_ordered(self):
@@ -138,10 +147,11 @@ class CountriesAndCapitals(object):
         print "-"*50
         print "These are the countries and capitals".center(50, " ")
         print "Ordered\n".center(50, " ")
+        print "Country".center(24, "*"), "Capital".center(24, "*") + "\n"
 
                         #This sorts the Contries                 This sorts the capitals
         for key, value in sorted(self.countries_capitals.iteritems(), key=lambda (k, v): (v, k)):
-            print "{country:^25s}{capital}".format(country=key, capital=value)
+            print key.center(24, " "), value.center(24, " ")
         print "\n" + "-" * 50
 
     def send_mail(self):
@@ -191,7 +201,6 @@ class CountriesAndCapitals(object):
 
     def menu_print(self):
         """This shows the options that has the menu"""
-
         print "----------------------------------------------------------------------"
         print "|                          Choose an option                          |"
         print "|1. Country      *To insert a country and capipal                    |"

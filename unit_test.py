@@ -15,7 +15,7 @@ class testCountriesAndCapitals(unittest.TestCase):
 	def test_is_title(self):
 		cc = application.CountriesAndCapitals()
 		self.assertEqual(cc.is_title("guate"), "Guate")
-		self.assertEqual(cc.is_title("espa\xc3\xb1a"), "Espa\xc3\xb1a")
+		self.assertEqual(cc.is_title("españa"), "España")
 
 	def test_minuscule(self):
 		cc = application.CountriesAndCapitals()
